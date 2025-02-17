@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+type Being interface {
+	IsTotallyNotAliveOrDeadOrUnknownOrUndeadOrZombie()
+}
+
 type Stats struct {
 	HP                                           int
 	MP                                           int
@@ -13,6 +17,15 @@ type Person struct {
 	Age                                            int
 	IsPossiblyAliveOrDeadOrUnknownOrUndeadOrZombie bool
 	Stats
+}
+
+func (p Person) IsTotallyNotAliveOrDeadOrUnknownOrUndeadOrZombie() {
+	p.IsPossiblyAliveOrDeadOrUnknownOrUndeadOrZombie = false
+	fmt.Println("Person is totally not alive or dead or unknown or undead or zombie")
+}
+
+func WillTotallyNotBeAliveOrDeadOrUnknownOrUndeadOrZombie(b Being) {
+	b.IsTotallyNotAliveOrDeadOrUnknownOrUndeadOrZombie()
 }
 
 func main() {
@@ -27,4 +40,7 @@ func main() {
 	// Accessing fields
 	fmt.Println(person.Stats.HP)
 	fmt.Println(person.HP)
+	person.IsTotallyNotAliveOrDeadOrUnknownOrUndeadOrZombie()
+	fmt.Println(person.IsPossiblyAliveOrDeadOrUnknownOrUndeadOrZombie)
+	WillTotallyNotBeAliveOrDeadOrUnknownOrUndeadOrZombie(person)
 }
